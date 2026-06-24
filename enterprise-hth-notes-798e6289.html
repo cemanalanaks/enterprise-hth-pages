@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>华体会 · 产品说明</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: #f2f4f7;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      color: #1e293b;
+      padding: 40px 20px;
+      line-height: 1.6;
+    }
+    .page {
+      max-width: 1040px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    /* hero 区域 */
+    .hero {
+      background: linear-gradient(145deg, #ffffff 0%, #f9fafc 100%);
+      border-radius: 24px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.02);
+      padding: 40px 36px;
+      border: 1px solid rgba(203, 213, 225, 0.3);
+    }
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      color: #0f172a;
+      margin-bottom: 12px;
+    }
+    .hero p {
+      font-size: 1.1rem;
+      color: #334155;
+      max-width: 720px;
+    }
+    .hero .tagline {
+      display: inline-block;
+      margin-top: 16px;
+      background: #eef2f6;
+      padding: 6px 18px;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      color: #1e293b;
+      border: 1px solid #dce2ec;
+    }
+
+    /* 卡片通用 */
+    .card-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .card {
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.02), 0 1px 2px rgba(0,0,0,0.02);
+      padding: 28px 32px;
+      border: 1px solid #e9edf2;
+      transition: box-shadow 0.2s ease;
+    }
+    .card:hover {
+      box-shadow: 0 8px 24px rgba(0,0,0,0.04), 0 2px 6px rgba(0,0,0,0.02);
+    }
+    .card h2 {
+      font-size: 1.35rem;
+      font-weight: 500;
+      margin-bottom: 14px;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card h2::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 20px;
+      background: #94a3b8;
+      border-radius: 4px;
+    }
+    .card p, .card li {
+      color: #334155;
+    }
+    .card ul {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 8px;
+    }
+    .card ul li {
+      padding: 6px 0 6px 20px;
+      position: relative;
+      border-bottom: 1px solid #f1f4f8;
+    }
+    .card ul li:last-child {
+      border-bottom: none;
+    }
+    .card ul li::before {
+      content: '·';
+      position: absolute;
+      left: 4px;
+      color: #64748b;
+      font-weight: 700;
+    }
+
+    /* 特点三列（亮点卡片） */
+    .features-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .feature-card {
+      background: #ffffff;
+      border-radius: 18px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+      padding: 24px 22px;
+      border: 1px solid #e9edf2;
+    }
+    .feature-card h3 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: #0f172a;
+    }
+    .feature-card p {
+      font-size: 0.95rem;
+      color: #334155;
+    }
+
+    /* 场景卡片（使用建议） */
+    .scenario-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 6px;
+    }
+    .scenario-item {
+      background: #fafbfd;
+      border-left: 3px solid #cbd5e1;
+      padding: 14px 18px;
+      border-radius: 12px;
+      border: 1px solid #edf1f6;
+      border-left-width: 4px;
+      border-left-color: #9ca3af;
+    }
+    .scenario-item strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #1e293b;
+      font-weight: 500;
+    }
+
+    /* 提示 + FAQ 合并 */
+    .flex-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .tip-card, .faq-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 24px 28px;
+      border: 1px solid #e9edf2;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    }
+    .tip-card h2, .faq-card h2 {
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-bottom: 14px;
+      color: #0f172a;
+    }
+    .faq-item {
+      margin-bottom: 14px;
+    }
+    .faq-item p {
+      margin-bottom: 4px;
+    }
+    .faq-item .q {
+      font-weight: 500;
+      color: #1e293b;
+    }
+    .faq-item .a {
+      color: #475569;
+      font-size: 0.95rem;
+      padding-left: 2px;
+    }
+
+    /* 链接行 */
+    .link-block {
+      background: #ffffff;
+      border-radius: 60px;
+      padding: 18px 28px;
+      border: 1px solid #e9edf2;
+      text-align: center;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.02);
+      font-size: 1rem;
+    }
+    .link-block a {
+      color: #1e293b;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid #cbd5e1;
+      transition: border-color 0.2s;
+    }
+    .link-block a:hover {
+      border-bottom-color: #0f172a;
+    }
+    .link-block .meta-note {
+      display: block;
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-top: 6px;
+      letter-spacing: 0.3px;
+    }
+
+    /* 响应式 */
+    @media (max-width: 820px) {
+      .features-row {
+        grid-template-columns: 1fr 1fr;
+      }
+      .flex-wrap {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 600px) {
+      body {
+        padding: 20px 14px;
+      }
+      .hero {
+        padding: 28px 20px;
+      }
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+      .card {
+        padding: 22px 18px;
+      }
+      .features-row {
+        grid-template-columns: 1fr;
+      }
+      .link-block {
+        padding: 16px 18px;
+        border-radius: 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- hero 摘要 -->
+    <div class="hero">
+      <h1>华体会 · 产品式的稳定入口</h1>
+      <p>一个面向日常使用、注重浏览连贯性的产品化页面。从结构到细节，都围绕「清晰、低干扰、可依赖」来设计。这里不堆砌口号，只呈现切实可用的说明与引导。</p>
+      <span class="tagline">基于场景 · 轻量说明</span>
+    </div>
+
+    <!-- 亮点卡片三列 -->
+    <div class="features-row">
+      <div class="feature-card">
+        <h3>整齐的叙述节奏</h3>
+        <p>从摘要到特点再到使用场景，段落之间保持一致的呼吸感。没有冗余模块，每段信息都有具体目的。</p>
+      </div>
+      <div class="feature-card">
+        <h3>克制的视觉语言</h3>
+        <p>浅灰基底、细边框、柔和阴影。卡片通过微妙的悬浮变化传递交互感，但并不喧宾夺主。</p>
+      </div>
+      <div class="feature-card">
+        <h3>内容优先的布局</h3>
+        <p>所有区块都为阅读服务，字体、间距、行宽都经过平衡。无论桌面还是手机，信息层级始终清晰。</p>
+      </div>
+    </div>
+
+    <!-- 使用建议（场景）卡片 -->
+    <div class="card">
+      <h2>使用建议 · 常见场景</h2>
+      <div class="scenario-list">
+        <div class="scenario-item">
+          <strong>日常浏览与信息查阅</strong>
+          当你需要一个入口稳定、页面结构简单的内容页时，<a href="https://enterprise-hth.com.cn">华体会</a> 提供的布局适合直接嵌入或作为起始页。段落之间留有间隔，眼睛不易疲劳。
+        </div>
+        <div class="scenario-item">
+          <strong>产品功能说明页参考</strong>
+          用卡片式分区承载不同模块，用细边框和阴影区分层级。这样的版式适合展示功能摘要、特点列表或使用流程，不必依赖复杂组件。
+        </div>
+        <div class="scenario-item">
+          <strong>快速原型或内部工具页面</strong>
+          如果你需要一个干净、不带过多装饰的说明页面，可以直接取用这里的 HTML 结构。所有样式都写在同一文件中，便于修改和移植。
+        </div>
+      </div>
+    </div>
+
+    <!-- 提示 + FAQ 摘要 双栏 -->
+    <div class="flex-wrap">
+      <div class="tip-card">
+        <h2>可信但克制的访问说明</h2>
+        <p style="margin-bottom: 10px;">页面本身不收集任何数据，不嵌入外部脚本，也不设置广告或跳转。所有链接都指向明确资源。</p>
+        <p>如果你正在了解相关产品信息，建议直接通过浏览器地址栏输入所需域名，或从书签中访问。本页面仅作为结构化内容的展示示例。</p>
+      </div>
+      <div class="faq-card">
+        <h2>FAQ 摘要</h2>
+        <div class="faq-item">
+          <p class="q">这个页面可以直接用吗？</p>
+          <p class="a">可以。所有 CSS 和 HTML 都包含在单个文件中。复制后保存为 .html 就能在本地或服务器上使用。</p>
+        </div>
+        <div class="faq-item">
+          <p class="q">为什么叫产品说明式？</p>
+          <p class="a">因为内容按照「摘要 → 亮点 → 使用建议 → 提示」的顺序排列，类似于一个轻量产品的介绍页，但语气更生活化。</p>
+        </div>
+        <div class="faq-item">
+          <p class="q">可以修改卡片里的链接吗？</p>
+          <p class="a">当然。替换 href 和文本内容即可，但请保持链接自然嵌入句子，不要使用“进入”“点击”等词作为链接文字。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 链接区块（自然嵌入句子） -->
+    <div class="link-block">
+      <span>若你想查看更多上下文，可以前往 <a href="https://enterprise-hth.com.cn">华体会</a> 的对应页面了解。</span>
+      <span class="meta-note">该链接指向的页面由第三方维护，本页仅作结构展示</span>
+    </div>
+
+  </div>
+</body>
+</html>
