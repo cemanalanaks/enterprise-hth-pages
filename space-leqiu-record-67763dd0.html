@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes">
+  <title>乐球直播 · 赛事信息索引</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #eaf4f1;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      color: #1d2b2b;
+      line-height: 1.6;
+      padding: 1.25rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .page-wrap {
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    /* 主视觉 Hero 卡片 */
+    .hero-card {
+      background: linear-gradient(145deg, #1e4643 0%, #2f6b66 100%);
+      border-radius: 2.5rem 2.5rem 2.5rem 2.5rem;
+      padding: 2.8rem 2rem 3.2rem;
+      margin-bottom: 2.2rem;
+      color: #f0fcf7;
+      box-shadow: 0 12px 28px rgba(23, 67, 59, 0.25);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-card::after {
+      content: '';
+      position: absolute;
+      top: -30%; right: -15%;
+      width: 280px; height: 280px;
+      background: radial-gradient(circle, #b1e3d4 0%, transparent 70%);
+      opacity: 0.18;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(2px);
+      padding: 0.3rem 1rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      letter-spacing: 0.5px;
+      margin-bottom: 1rem;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .hero-card h1 {
+      font-size: 2.6rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      max-width: 90%;
+    }
+    .hero-card p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      max-width: 700px;
+      margin-bottom: 1.8rem;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem 2.5rem;
+      font-size: 0.95rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+    .hero-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .hero-meta i { font-style: normal; }
+
+    /* 网格卡片 */
+    .grid-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0 2.5rem;
+    }
+    .card {
+      background: #ffffff;
+      border-radius: 1.8rem;
+      padding: 1.8rem 1.5rem 2rem;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+      transition: transform 0.2s ease, box-shadow 0.2s;
+      border: 1px solid #d3e6e0;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(44, 101, 88, 0.08);
+    }
+    .card-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px; height: 48px;
+      background: #d7f0e9;
+      border-radius: 18px;
+      margin-bottom: 1.2rem;
+      font-size: 1.6rem;
+      color: #1e5a52;
+    }
+    .card h3 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+      color: #173d38;
+    }
+    .card p {
+      color: #3d5752;
+      font-size: 0.98rem;
+    }
+    .card ul {
+      list-style: none;
+      margin-top: 0.8rem;
+    }
+    .card ul li {
+      padding: 0.3rem 0 0.3rem 1.8rem;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="%232b6b62" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>') left center no-repeat;
+      background-size: 14px;
+    }
+
+    /* 适合人群卡片（特殊底色） */
+    .card.audience {
+      background: #f2faf7;
+      border-left: 4px solid #2f7b70;
+    }
+
+    /* 自然链接段落 */
+    .link-section {
+      background: #ffffffdd;
+      backdrop-filter: blur(4px);
+      border-radius: 2rem;
+      padding: 2.2rem 2rem;
+      margin: 2rem 0 2.8rem;
+      border: 1px solid #cfe5df;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.02);
+    }
+    .link-section p {
+      font-size: 1.1rem;
+      margin-bottom: 0.8rem;
+      color: #1f3b37;
+    }
+    .link-section a {
+      color: #1c6e62;
+      text-decoration: none;
+      font-weight: 600;
+      border-bottom: 2px solid #90c7bb;
+      transition: border-color 0.2s;
+    }
+    .link-section a:hover {
+      border-bottom-color: #1b584d;
+    }
+
+    /* FAQ 摘要 */
+    .faq-mini {
+      background: #ffffff;
+      border-radius: 2rem;
+      padding: 1.8rem 2rem;
+      margin: 2rem 0 1.8rem;
+      border: 1px solid #d7e6e1;
+    }
+    .faq-mini h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #1e4b44;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .faq-item {
+      padding: 0.8rem 0;
+      border-bottom: 1px solid #e5f0ec;
+    }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-q {
+      font-weight: 600;
+      color: #1e5a50;
+      margin-bottom: 0.2rem;
+    }
+    .faq-a {
+      color: #42605a;
+      font-size: 0.95rem;
+    }
+
+    /* 底部 */
+    .footer-note {
+      text-align: center;
+      color: #5f7d77;
+      font-size: 0.85rem;
+      border-top: 1px solid #c6ddd6;
+      padding-top: 1.8rem;
+      margin-top: 0.5rem;
+      letter-spacing: 0.3px;
+    }
+
+    /* 响应式细节 */
+    @media (max-width: 600px) {
+      body { padding: 0.9rem; }
+      .hero-card { padding: 2rem 1.2rem 2.2rem; border-radius: 2rem; }
+      .hero-card h1 { font-size: 2rem; max-width: 100%; }
+      .hero-card p { font-size: 1rem; }
+      .grid-cards { gap: 1rem; }
+      .card { padding: 1.4rem 1.2rem; }
+      .link-section { padding: 1.6rem 1.2rem; }
+      .faq-mini { padding: 1.4rem 1.2rem; }
+    }
+    @media (max-width: 400px) {
+      .hero-card h1 { font-size: 1.7rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <!-- 主视觉 Hero -->
+  <div class="hero-card">
+    <div class="hero-tag">📋 信息索引 · 持续整理</div>
+    <h1>乐球直播 · 赛事资料库</h1>
+    <p>从联赛日程到球队数据，把散落的信息收拢成顺手可查的卡片。不追热点，只做靠谱的索引。</p>
+    <div class="hero-meta">
+      <span><i>🏆</i> 覆盖 12+ 赛事</span>
+      <span><i>📅</i> 每周更新赛历</span>
+      <span><i>🧩</i> 专注资料结构化</span>
+    </div>
+  </div>
+
+  <!-- 用途卡片 + 适合人群 -->
+  <div class="grid-cards">
+    <div class="card">
+      <div class="card-icon">🗂️</div>
+      <h3>赛程卡片化</h3>
+      <p>把杂乱的对阵表拆成按时间、联赛排列的卡片，一眼看到下一场焦点战。支持快速筛选与收藏。</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📊</div>
+      <h3>数据简表</h3>
+      <p>积分、净胜球、近期战绩以极简表格呈现。不堆砌数字，只摘取你需要的对比维度。</p>
+    </div>
+    <div class="card audience">
+      <div class="card-icon">👥</div>
+      <h3>适合这些人</h3>
+      <ul>
+        <li>每周末想快速确认赛程的球迷</li>
+        <li>做赛事笔记、收集信息的爱好者</li>
+        <li>想了解联赛结构的新观众</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 自然链接段落 -->
+  <div class="link-section">
+    <p>如果你正在整理观赛计划，或者想找个地方集中翻阅联赛资料，<a href="https://space-leqiu.com">乐球直播</a> 把赛事信息做成了规整的索引页。没有冗余弹窗，打开就是干净的赛程与数据。</p>
+    <p>页面结构偏向工具感，适合一边浏览一边随手记录。我们也在逐步补充球队 roster 与历史交锋卡片。</p>
+  </div>
+
+  <!-- FAQ 摘要 -->
+  <div class="faq-mini">
+    <h3>💬 常见问题摘要</h3>
+    <div class="faq-item">
+      <div class="faq-q">数据多久更新一次？</div>
+      <div class="faq-a">主要联赛赛程每周一、四更新；杯赛及次级联赛视官方发布节奏同步，通常延迟不超过 24 小时。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">能否看到历史赛季数据？</div>
+      <div class="faq-a">当前索引以当季数据为主，过往赛季（近三年）部分联赛正在回溯整理，可通过页面内“归档”筛选查看。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">移动端浏览体验如何？</div>
+      <div class="faq-a">卡片和表格均适配手机屏幕，横滑即可查看完整表格列；建议使用 Safari 或 Chrome 最新版本。</div>
+    </div>
+  </div>
+
+  <!-- 底部 -->
+  <div class="footer-note">
+    基于公开赛事信息整理 · 仅供参考
+  </div>
+
+</div>
+</body>
+</html>
